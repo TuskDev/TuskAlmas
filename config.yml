@@ -1,0 +1,15 @@
+#########################[ TuskAlmas ]##############################
+##                                                                ##
+##                       Autor: Tusk                              ##
+##                         Versao: 1.0                            ##
+##                                                                ##
+##                     Contato: Loid#7354                         ##
+##                                                                ##
+####################################################################
+
+Configuracoes:
+  TopGuiName: Almas - GUI
+  Porcentagem: 100
+  UpdateTag: 20
+Almas:
+  Coelho1227_: 200

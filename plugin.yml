@@ -1,0 +1,5 @@
+name: TuskAlmas
+main: com.tuskdev.almas.Main
+version: 1.0
+author: Tusk
+commands:
