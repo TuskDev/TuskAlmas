@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import com.tuskdev.almas.Main;
-import com.tuskdev.almas.api.AlmasAPI;
+import com.tuskdev.almas.utils.AlmasUtils;
 
 public class AlmasListeners implements Listener {
 
@@ -74,7 +74,7 @@ public class AlmasListeners implements Listener {
 				if (p.getItemInHand().getAmount() == 1) {
 					p.setItemInHand(null);
 					p.updateInventory();
-					AlmasAPI.AddKills(p.getName(), 1);
+					AlmasUtils.addAlmas(p.getName(), 1);
 					p.sendMessage("");
 					p.sendMessage("§eAlma's aumentada em 1");
 					p.sendMessage("§eVoce ganhou 10 moedas, as quais poderam ser usadas em breve");
@@ -85,7 +85,7 @@ public class AlmasListeners implements Listener {
 				if (p.getItemInHand().getAmount() > 1) {
 					p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
 					p.updateInventory();
-					AlmasAPI.AddKills(p.getName(), 1);
+					AlmasUtils.addAlmas(p.getName(), 1);
 					p.sendMessage("");
 					p.sendMessage("§eAlma's aumentada em 1");
 					p.sendMessage("§eVoce ganhou 10 moedas, as quais poderam ser usadas em breve");

@@ -10,34 +10,33 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.tuskdev.almas.Main;
-import com.tuskdev.almas.api.AlmasAPI;
 import com.tuskdev.almas.api.TopAPI;
-import com.tuskdev.almas.utils.ItemBuilder;
-import com.tuskdev.almas.utils.ItemTeste;
-import com.tuskdev.almas.utils.ScrollerInventory;
+import com.tuskdev.almas.create.ItemCreate;
+import com.tuskdev.almas.utils.AlmasUtils;
+import com.tuskdev.almas.create.InventoryCreate;
 
 public class ComandoAlmas {
 
 	@Command(aliases = { "almas" }, usage = "/almas", description = "Almas Comandos")
 	public void onRegister(final Player p, final String[] args) {
 		if (args.length == 0) {
-			p.sendMessage("§eSuas Almas: §f" + AlmasAPI.getAlmas(p.getName()));
+			p.sendMessage("§eSuas Almas: §f" + AlmasUtils.getAlmas(p.getName()));
 			return;
 		}
 		if (args.length == 1) {
 			if (args[0].equalsIgnoreCase("top")) {
 				ArrayList<ItemStack> items = new ArrayList<>();
-				Main.ranks.clear();
+				Main.getRanks().clear();
 				TopAPI.SaveHash();
-				for (Entry<String, Integer> bla : TopAPI.entriesSortedByValues(Main.ranks)) {
+				for (Entry<String, Integer> bla : TopAPI.entriesSortedByValues(Main.getRanks())) {
 
-					items.add(new ItemBuilder(Material.SKULL_ITEM).durability(3).owner(bla.getKey())
+					items.add(new ItemCreate(Material.SKULL_ITEM).durability(3).owner(bla.getKey())
 							.name("§eCabeça de: §f" + bla.getKey()).lore("§eValor: §f" + bla.getValue() + " alma's")
 							.build());
 				}
-				ScrollerInventory scroll = new ScrollerInventory(items,
+				InventoryCreate scroll = new InventoryCreate(items,
 						Main.pl.getConfig().getString("Configuracoes.TopGuiName"), p);
-				ScrollerInventory.users.put(p.getUniqueId(), scroll);
+				InventoryCreate.users.put(p.getUniqueId(), scroll);
 				return;
 			}
 		}
@@ -62,10 +61,10 @@ public class ComandoAlmas {
 						p.sendMessage("§cEste Jogador Não existe!");
 						return;
 					} else {
-						AlmasAPI.setAlmas(target.getName(), Kills);
+						AlmasUtils.setAlmas(target.getName(), Kills);
 						p.sendMessage("§aAlmas de §7" + target.getName() + " §aForam alteradas para §7"
-								+ AlmasAPI.getAlmas(target.getName()));
-						Main.ranks.clear();
+								+ AlmasUtils.getAlmas(target.getName()));
+						Main.getRanks().clear();
 						TopAPI.SaveHash();
 					}
 				}
@@ -80,31 +79,12 @@ public class ComandoAlmas {
 						p.sendMessage("§cEste Jogador Não existe!");
 						return;
 					} else {
-						AlmasAPI.removeKills(p.getName(), Kills);
+						AlmasUtils.removeAlmas(p.getName(), Kills);
 						p.sendMessage("§aAlmas de §7" + target.getName() + " §aForam alteradas para §7"
-								+ AlmasAPI.getAlmas(target.getName()));
-						Main.ranks.clear();
+								+ AlmasUtils.getAlmas(target.getName()));
+						Main.getRanks().clear();
 						TopAPI.SaveHash();
 					}
-				}
-			}
-			if (args[0].equalsIgnoreCase("teste")) {
-				if (args.length < 2) {
-					p.sendMessage("§eUtilize: §7/almas teste <jogador> <quantia>");
-					return;
-				}
-				Player p2 = Bukkit.getServer().getPlayer(args[1]);
-				if (p2 == null) {
-					p.sendMessage("§cEste usuário não está online.");
-					return;
-				}
-				try {
-					int quantia = Integer.parseInt(args[2]);
-					new ItemTeste(p, quantia);
-					p.sendMessage("§eEnviados " + quantia + " ItemTeste para " + p.getName() + ".");
-				} catch (Exception e) {
-					p.sendMessage("§cVocê inseriu uma quantia inválida.");
-
 				}
 			}
 			if (args[0].equalsIgnoreCase("add")) {
@@ -117,10 +97,10 @@ public class ComandoAlmas {
 						p.sendMessage("§cEste Jogador Não existe!");
 						return;
 					} else {
-						AlmasAPI.AddKills(p.getName(), Kills);
+						AlmasUtils.addAlmas(p.getName(), Kills);
 						p.sendMessage("§aAlmas de §7" + target.getName() + " §aForam alteradas para §7"
-								+ AlmasAPI.getAlmas(target.getName()));
-						Main.ranks.clear();
+								+ AlmasUtils.getAlmas(target.getName()));
+						Main.getRanks().clear();
 						TopAPI.SaveHash();
 					}
 				}
@@ -135,7 +115,7 @@ public class ComandoAlmas {
 						return;
 					} else {
 						p.sendMessage("§aAlmas de §7" + target.getName() + " §aQuantia: §7"
-								+ AlmasAPI.getAlmas(target.getName()));
+								+ AlmasUtils.getAlmas(target.getName()));
 					}
 				}
 			}

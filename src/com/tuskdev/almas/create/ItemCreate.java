@@ -1,4 +1,4 @@
-package com.tuskdev.almas.utils;
+package com.tuskdev.almas.create;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,65 +18,65 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class ItemBuilder {
+public class ItemCreate {
 
 	private ItemStack is;
 
-	public ItemBuilder(Material m) {
+	public ItemCreate(Material m) {
 		this(m, 1, (short) 0);
 	}
 	
-	public ItemBuilder(int id) {
+	public ItemCreate(int id) {
 		this(id, 1, (short) 0);
 	}
 
-	public ItemBuilder(ItemStack is) {
+	public ItemCreate(ItemStack is) {
 		this.is = is.clone();
 	}
 
-	public ItemBuilder(Material m, int amount, short data) {
+	public ItemCreate(Material m, int amount, short data) {
 		is = new ItemStack(m, amount, data);
 	}
 
 	@SuppressWarnings("deprecation")
-	public ItemBuilder(int id, int amount, short data) {
+	public ItemCreate(int id, int amount, short data) {
 		is = new ItemStack(id, amount, data);
 	}
 	
-	public ItemBuilder clone() {
-		return new ItemBuilder(is);
+	public ItemCreate clone() {
+		return new ItemCreate(is);
 	}
 
-	public ItemBuilder durability(int dur) {
+	public ItemCreate durability(int dur) {
 		is.setDurability((short) dur);
 		return this;
 	}
 
-	public ItemBuilder name(String name) {
+	public ItemCreate name(String name) {
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
 		is.setItemMeta(im);
 		return this;
 	}
 
-	public ItemBuilder unsafeEnchantment(Enchantment ench, int level) {
+	public ItemCreate unsafeEnchantment(Enchantment ench, int level) {
 		is.addUnsafeEnchantment(ench, level);
 		return this;
 	}
 
-	public ItemBuilder enchant(Enchantment ench, int level) {
+	public ItemCreate enchant(Enchantment ench, int level) {
 		ItemMeta im = is.getItemMeta();
 		im.addEnchant(ench, level, true);
 		is.setItemMeta(im);
 		return this;
 	}
 
-	public ItemBuilder removeEnchantment(Enchantment ench) {
+	public ItemCreate removeEnchantment(Enchantment ench) {
 		is.removeEnchantment(ench);
 		return this;
 	}
 
-	public ItemBuilder owner(String owner) {
+	public ItemCreate owner(String owner) {
 		try {
 			SkullMeta im = (SkullMeta) is.getItemMeta();
 			im.setOwner(owner);
@@ -86,12 +86,12 @@ public class ItemBuilder {
 		return this;
 	}
 
-	public ItemBuilder infinityDurabilty() {
+	public ItemCreate infinityDurabilty() {
 		is.setDurability(Short.MAX_VALUE);
 		return this;
 	}
 
-	public ItemBuilder lore(String... lore) {
+	public ItemCreate lore(String... lore) {
 		ItemMeta im = is.getItemMeta();
 		List<String> out = im.getLore() == null ? new ArrayList<>() : im.getLore();
 		for (String string : lore)
@@ -101,7 +101,7 @@ public class ItemBuilder {
 		return this;
 	}
 
-	public ItemBuilder listlore(List<String> lore) {
+	public ItemCreate listlore(List<String> lore) {
 		ItemMeta im = is.getItemMeta();
 		im.setLore(lore);
 		is.setItemMeta(im);
@@ -109,21 +109,21 @@ public class ItemBuilder {
 	}
 
 	@SuppressWarnings("deprecation")
-	public ItemBuilder woolColor(DyeColor color) {
+	public ItemCreate woolColor(DyeColor color) {
 		if (!is.getType().equals(Material.WOOL))
 			return this;
 		is.setDurability(color.getDyeData());
 		return this;
 	}
 
-	public ItemBuilder amount(int amount) {
+	public ItemCreate amount(int amount) {
 		if (amount > 64)
 			amount = 64;
 		is.setAmount(amount);
 		return this;
 	}
 
-	public ItemBuilder removeAttributes() {
+	public ItemCreate removeAttributes() {
 		ItemMeta meta = is.getItemMeta();
 		meta.addItemFlags(ItemFlag.values());
 		is.setItemMeta(meta);
@@ -134,7 +134,7 @@ public class ItemBuilder {
 		return is;
 	}
 
-	public ItemBuilder color(Color color) {
+	public ItemCreate color(Color color) {
 		if (!is.getType().name().contains("LEATHER_"))
 			return this;
 		LeatherArmorMeta meta = (LeatherArmorMeta) is.getItemMeta();
@@ -143,7 +143,7 @@ public class ItemBuilder {
 		return this;
 	}
 	
-	public ItemBuilder head(String texture) {
+	public ItemCreate head(String texture) {
 //		ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
 //		GameProfile profile = (texture, UUID.randomUUID());
 //		ItemMeta headMeta = head.getItemMeta();

@@ -1,4 +1,4 @@
-package com.tuskdev.almas.utils;
+package com.tuskdev.almas.create;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,15 +11,15 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ScrollerInventory{
+public class InventoryCreate{
 
     public ArrayList<Inventory> pages = new ArrayList<Inventory>();
     public UUID id;
     public int currpage = 0;
     public int atual = 1;
-    public static HashMap<UUID, ScrollerInventory> users = new HashMap<UUID, ScrollerInventory>();
+    public static HashMap<UUID, InventoryCreate> users = new HashMap<UUID, InventoryCreate>();
 
-    public ScrollerInventory(ArrayList<ItemStack> items, String name, Player p){
+    public InventoryCreate(ArrayList<ItemStack> items, String name, Player p){
         this.id = UUID.randomUUID();
         Inventory page = getBlankPage(name, p);
         atual++;

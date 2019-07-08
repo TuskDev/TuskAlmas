@@ -1,6 +1,7 @@
 package com.tuskdev.almas;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -12,14 +13,10 @@ import com.tuskdev.almas.comandos.CommandManager;
 import com.tuskdev.almas.listeners.AlmasListeners;
 
 public class Main extends JavaPlugin {
+	
 	public static Main pl;
 
-	public static HashMap<String, Integer> ranks = new HashMap<>();
-
-	static {
-		Main.ranks = new HashMap<String, Integer>();
-
-	}
+	private static Map<String, Integer> ranks = new HashMap<String, Integer>();
 
 	public void onEnable() {
 		pl = this;
@@ -47,5 +44,9 @@ public class Main extends JavaPlugin {
 
 	public void onDisable() {
 		debug("&aPlugin Desativado");
+	}
+
+	public static Map<String, Integer> getRanks() {
+		return ranks;
 	}
 }

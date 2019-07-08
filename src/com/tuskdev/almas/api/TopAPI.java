@@ -19,7 +19,7 @@ public class TopAPI implements Listener {
 
 	public static void SaveHash() {
 		for (String path : Main.pl.getConfig().getConfigurationSection("Lista.").getKeys(false)) {
-			Main.ranks.put(path, Main.pl.getConfig().getInt("Lista." + path));
+			Main.getRanks().put(path, Main.pl.getConfig().getInt("Lista." + path));
 		}
 	}
 
@@ -37,7 +37,7 @@ public class TopAPI implements Listener {
 
 	public static String getTop(int i) {
 		arrayOrganizado.clear();
-		for (Entry<String, Integer> bla : entriesSortedByValues(Main.ranks)) {
+		for (Entry<String, Integer> bla : entriesSortedByValues(Main.getRanks())) {
 			arrayOrganizado.add(bla.getKey());
 		}
 		try {
@@ -48,7 +48,7 @@ public class TopAPI implements Listener {
 	}
 	public static String getTop1() {
 		arrayOrganizado2.clear();
-		for (Entry<String, Integer> bla : entriesSortedByValues(Main.ranks)) {
+		for (Entry<String, Integer> bla : entriesSortedByValues(Main.getRanks())) {
 			arrayOrganizado2.add(bla.getKey());
 		}
 		try {

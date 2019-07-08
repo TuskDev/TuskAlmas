@@ -1,8 +1,8 @@
-package com.tuskdev.almas.api;
+package com.tuskdev.almas.utils;
 
 import com.tuskdev.almas.Main;
 
-public class AlmasAPI {
+public class AlmasUtils {
 
 	public static void setAlmas(String nome, int almas) {
 		Main.pl.getConfig().set("Almas." + nome, almas);
@@ -14,17 +14,13 @@ public class AlmasAPI {
 
 	}
 
-	public static void removeKills(String nome, int almas) {
+	public static void removeAlmas(String nome, int almas) {
 		setAlmas(nome, getAlmas(nome) - almas);
 		Main.pl.saveConfig();
 	}
 
-	public static void AddKills(String nome, int almas) {
+	public static void addAlmas(String nome, int almas) {
 		setAlmas(nome, getAlmas(nome) + almas);
 		Main.pl.saveConfig();
-	}
-
-	public static String setColor(String msg) {
-		return msg.replace("&", "§");
 	}
 }
